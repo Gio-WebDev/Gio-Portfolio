@@ -2,6 +2,7 @@
 
 - [x] Hero uses a GL monogram, with no profile photograph, as requested by the owner.
 - [x] Original ATS resume without a photo added as `resume/Gio-Lopez-Resume.pdf`; its phone number is included with the owner’s explicit permission.
+- [x] Original resume with a photo added as `resume/Gio-Lopez-Resume-With-Photo.pdf`, selectable in the Resume section.
 - [ ] Add real POSEIDON screenshots to `projects/poseidon/`.
 - [ ] Add real HANAP screenshots to `projects/hanap/`.
 - [x] BrewBite homepage screenshot added as `projects/brewbite/01-home.png`, with an accurate caption.

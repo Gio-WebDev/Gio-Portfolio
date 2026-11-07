@@ -4,6 +4,25 @@ import { assets } from '../data/assets'
 
 export function Resume() {
   const [preview, setPreview] = useState(false)
+  const [selectedId, setSelectedId] = useState('ats')
+  const versions = [
+    {
+      id: 'ats',
+      label: 'ATS · No photo',
+      description: 'ATS resume · PDF · No photo',
+      filename: 'Gio_Resume_ATS_No_Photo.pdf',
+      src: assets.resume,
+    },
+    {
+      id: 'photo',
+      label: 'With photo',
+      description: 'Resume · PDF · With photo',
+      filename: 'Gio_Resume_With_Photo.pdf',
+      src: assets.resumeWithPhoto,
+    },
+  ].filter((version) => version.src)
+  const selected =
+    versions.find((version) => version.id === selectedId) ?? versions[0]
   return (
     <section
       className="resume-section section"
@@ -32,32 +51,53 @@ export function Resume() {
               <div>
                 <strong>Gio Lopez — Resume</strong>
                 <span>
-                  {assets.resume ? 'ATS resume · PDF · No photo' : 'PDF not available yet'}
+                  {selected ? selected.description : 'PDF not available yet'}
                 </span>
               </div>
-              {assets.resume && <span className="file-type">PDF</span>}
+              {selected && <span className="file-type">PDF</span>}
             </div>
-            {assets.resume ? (
+            {versions.length > 1 && (
+              <fieldset className="resume-variants">
+                <legend>Resume version</legend>
+                <div className="resume-options">
+                  {versions.map((version) => (
+                    <label className="resume-option" key={version.id}>
+                      <input
+                        type="radio"
+                        name="resume-version"
+                        value={version.id}
+                        checked={selected.id === version.id}
+                        onChange={() => setSelectedId(version.id)}
+                      />
+                      <span>{version.label}</span>
+                    </label>
+                  ))}
+                </div>
+              </fieldset>
+            )}
+            {selected ? (
               <>
                 <div className="button-group">
                   <button
                     className="button primary"
                     onClick={() => setPreview(!preview)}
+                    aria-expanded={preview}
+                    aria-controls={preview ? 'resume-preview' : undefined}
                   >
                     {preview ? <X size={16} /> : <Eye size={16} />}
                     {preview ? 'Close preview' : 'View resume'}
                   </button>
                   <a
-                    href={assets.resume}
+                    href={selected.src!}
                     className="button secondary"
-                    download="Gio_Resume_ATS_No_Photo.pdf"
+                    download={selected.filename}
                   >
                     <Download size={16} /> Download
                   </a>
                 </div>
                 <a
                   className="text-link"
-                  href={assets.resume}
+                  href={selected.src!}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -77,24 +117,25 @@ export function Resume() {
             )}
           </div>
         </div>
-        {preview && assets.resume && (
-          <div className="resume-preview">
+        {preview && selected && (
+          <div className="resume-preview" id="resume-preview">
             <object
-              data={assets.resume}
+              key={selected.id}
+              data={selected.src!}
               type="application/pdf"
               aria-label="Gio Lopez resume PDF"
             >
               <p>
                 Your browser doesn’t support embedded PDFs.{' '}
                 <a
-                  href={assets.resume}
+                  href={selected.src!}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   Open the resume in a new tab
                 </a>{' '}
                 or{' '}
-                <a href={assets.resume} download>
+                <a href={selected.src!} download={selected.filename}>
                   download it
                 </a>
                 .
@@ -102,7 +143,7 @@ export function Resume() {
             </object>
             <p>
               Can’t see the document?{' '}
-              <a href={assets.resume} target="_blank" rel="noopener noreferrer">
+              <a href={selected.src!} target="_blank" rel="noopener noreferrer">
                 Open the PDF directly <ArrowUpRight size={13} />
               </a>
             </p>

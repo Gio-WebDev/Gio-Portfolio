@@ -30,7 +30,7 @@ npm.cmd run test:e2e
 - Hero, about, categorized verified skills, education and academic project experience, resume, contact, social links, and dynamic copyright.
 - Four typed project records with POSEIDON featured first. Filters, detailed case studies, shareable `/?project=poseidon` URLs, browser history, native modal focus containment, Escape dismissal, and focus restoration.
 - Actual-asset discovery, honest missing-asset states, screenshot galleries, and image-error fallbacks. No generated project screenshots or fabricated employment. The original ATS PDF includes the phone number with the owner’s explicit permission.
-- Conditional PDF preview, download, open-in-new-tab, unsupported-browser fallback, and a clear missing-file state.
+- Selectable ATS (no photo) and with-photo resumes, each with PDF preview, download, open-in-new-tab, unsupported-browser fallback, and a clear missing-file state.
 - Server-side Resend endpoint with validation, byte / field limits, honeypot, same-origin checks, rate limiting, provider timeouts, plain-text emails, reply-to, and idempotency.
 - SEO and Open Graph metadata, a custom favicon, social artwork, static 404 page, and Vercel security headers.
 
@@ -57,18 +57,19 @@ Existing starter assets remain in place and are no longer referenced. Private do
 
 ## Add the real assets
 
-| Asset                  | Required path / instructions                                                                                                                                 |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Hero artwork           | A text-based GL monogram. The owner requested that the profile photograph be removed. |
-| Resume                 | **`public/resume/Gio-Lopez-Resume.pdf`**. The asset scanner checks the PDF header.                                                                           |
-| POSEIDON screenshots   | Actual images in `public/projects/poseidon/`                                                                                                                 |
-| HANAP screenshots      | Actual images in `public/projects/hanap/`                                                                                                                    |
-| BrewBite screenshots   | Actual images in `public/projects/brewbite/`                                                                                                                 |
-| Rizal game screenshots | Actual images in `public/projects/rizal/`                                                                                                                    |
+| Asset                  | Required path / instructions                                                            |
+| ---------------------- | --------------------------------------------------------------------------------------- |
+| Hero artwork           | A text-based GL monogram. The owner requested that the profile photograph be removed.   |
+| ATS resume (no photo)  | **`public/resume/Gio-Lopez-Resume.pdf`**. The asset scanner checks the PDF header.      |
+| Resume with photo      | **`public/resume/Gio-Lopez-Resume-With-Photo.pdf`**. Also checked by the asset scanner. |
+| POSEIDON screenshots   | Actual images in `public/projects/poseidon/`                                            |
+| HANAP screenshots      | Actual images in `public/projects/hanap/`                                               |
+| BrewBite screenshots   | Actual images in `public/projects/brewbite/`                                            |
+| Rizal game screenshots | Actual images in `public/projects/rizal/`                                               |
 
 The scanner runs before `dev` and `build`. After adding assets, restart the dev server or run `npm.cmd run assets`. It only references files that exist. Missing images produce labeled typographic placeholders; missing PDFs produce an email request link instead of a broken download.
 
-Current supplied assets: the BrewBite homepage screenshot, the Rizal game main-menu screenshot, and the original ATS resume without a photo are included. The hero uses a GL monogram; no profile photograph is published. The resume and screenshots are copied unchanged. The owner explicitly authorized including the original PDF and its phone number. The ATS PDF is available for preview, download as `Gio_Resume_ATS_No_Photo.pdf`, and opening in a new tab.
+Current supplied assets: the BrewBite homepage screenshot, the Rizal game main-menu screenshot, and both original resume PDFs are included. The hero uses a GL monogram. A photograph appears only inside the with-photo resume, as requested by the owner. Both PDFs and the screenshots are copied unchanged, and the owner authorized including the resume contact information. The Resume section offers **ATS · No photo** (the default) and **With photo** options. Selecting a version updates its preview, download, and new-tab link. Downloads use the original filenames `Gio_Resume_ATS_No_Photo.pdf` and `Gio_Resume_With_Photo.pdf`; the hero download continues to use the ATS version.
 
 Vercel’s response headers allow same-origin embedding for files under `/resume/`, so the portfolio can preview its own PDF while other pages keep their existing framing restrictions. Browsers without an embedded PDF viewer receive direct-open and download links. The local automated browser used the fallback; PDF response bytes and the download were checked separately.
 
@@ -139,6 +140,6 @@ Added runtime dependencies: `lucide-react`, `@fontsource-variable/dm-sans`. Adde
 
 The API tests use Node’s built-in test runner and mocked HTTP responses; they never send real emails. Browser tests cover responsive widths from 320–1440px, navigation, all project cards, case-study history / Escape / focus restoration, missing-file states, submission errors, and automated WCAG 2.2 AA checks. Automated checks do not replace manual screen-reader and real-device review.
 
-Validation completed: `npm run lint` and `npm run build` pass; all **15 API tests** and **10 desktop/mobile browser tests** pass. Automated axe checks found no WCAG 2.2 AA violations on the homepage and POSEIDON case study in the tested desktop/mobile configurations. Overflow checks pass at 320, 375, 768, 1024, and 1440 pixels. Browser checks cover the supplied images, PDF response, preview controls, and ATS download filename. Real email delivery remains untested without sending configuration.
+Validation completed: `npm run lint` and `npm run build` pass; all **15 API tests** and **10 desktop/mobile browser tests** pass. Automated axe checks found no WCAG 2.2 AA violations on the homepage and POSEIDON case study in the tested desktop/mobile configurations. Overflow checks pass at 320, 375, 768, 1024, and 1440 pixels. Browser checks cover both resume variants, their preview and new-tab links, correct download filenames, and byte-identical downloads. Real email delivery remains untested without sending configuration.
 
 `npm audit --omit=dev` reports **zero vulnerabilities**. The full dependency audit reported a moderate `minimatch` advisory propagated through the existing ESLint / TypeScript ESLint development tree (10 reported entries, one underlying advisory). These tools are not part of the deployed browser or contact API. A forced tooling downgrade has not been applied. Review upstream compatible fixes before introducing dependency overrides.

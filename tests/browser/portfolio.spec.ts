@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test'
 import AxeBuilder from '@axe-core/playwright'
+import { readFile } from 'node:fs/promises'
 import assets from '../../src/data/assets.generated.json' with { type: 'json' }
 
 test('portfolio has no overflow or runtime errors and exposes all verified projects', async ({
@@ -12,6 +13,7 @@ test('portfolio has no overflow or runtime errors and exposes all verified proje
     'Thoughtful',
   )
   await expect(page.locator('.project-card')).toHaveCount(4)
+  await expect(page.locator('#home img')).toHaveCount(0)
   for (const width of [320, 375, 768, 1024, 1440]) {
     await page.setViewportSize({ width, height: 1000 })
     expect(
@@ -27,7 +29,14 @@ test('portfolio has no overflow or runtime errors and exposes all verified proje
   )
   for (const image of await page.locator('img').all()) {
     await image.scrollIntoViewIfNeeded()
-    await expect.poll(() => image.evaluate((element: HTMLImageElement) => element.complete && element.naturalWidth > 0)).toBe(true)
+    await expect
+      .poll(() =>
+        image.evaluate(
+          (element: HTMLImageElement) =>
+            element.complete && element.naturalWidth > 0,
+        ),
+      )
+      .toBe(true)
   }
   await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }))
   await page.screenshot({
@@ -91,18 +100,54 @@ test('navigation and honest resume/contact states work', async ({
     .getByRole('navigation', { name: 'Main navigation' })
     .getByRole('link', { name: 'Resume', exact: true })
     .click()
-  if (assets.resume) {
-    await expect(page.getByText('ATS resume · PDF · No photo')).toBeInViewport()
-    await page.getByRole('button', { name: 'View resume', exact: true }).click()
-    await expect(page.getByLabel('Gio Lopez resume PDF')).toHaveAttribute('data', assets.resume)
-    const pdf = await page.request.get(assets.resume)
-    expect(pdf.ok()).toBe(true)
-    expect((await pdf.body()).subarray(0, 5).toString()).toBe('%PDF-')
-    const downloadEvent = page.waitForEvent('download')
-    await page.locator('#resume a[download]').first().click()
-    const download = await downloadEvent
-    expect(download.suggestedFilename()).toBe('Gio_Resume_ATS_No_Photo.pdf')
-    await page.getByRole('button', { name: 'Close preview', exact: true }).click()
+  const resumeVersions = [
+    {
+      src: assets.resume,
+      label: 'ATS · No photo',
+      description: 'ATS resume · PDF · No photo',
+      filename: 'Gio_Resume_ATS_No_Photo.pdf',
+    },
+    {
+      src: assets.resumeWithPhoto,
+      label: 'With photo',
+      description: 'Resume · PDF · With photo',
+      filename: 'Gio_Resume_With_Photo.pdf',
+    },
+  ].filter((version) => version.src)
+  if (resumeVersions.length) {
+    for (const version of resumeVersions) {
+      if (resumeVersions.length > 1)
+        await page
+          .getByRole('radio', { name: version.label, exact: true })
+          .check()
+      await expect(
+        page.getByText(version.description, { exact: true }),
+      ).toBeInViewport()
+      await page
+        .getByRole('button', { name: 'View resume', exact: true })
+        .click()
+      await expect(page.getByLabel('Gio Lopez resume PDF')).toHaveAttribute(
+        'data',
+        version.src!,
+      )
+      await expect(
+        page.locator('.resume-actions > .text-link'),
+      ).toHaveAttribute('href', version.src!)
+      const pdf = await page.request.get(version.src!)
+      expect(pdf.ok()).toBe(true)
+      const pdfBytes = await pdf.body()
+      expect(pdfBytes.subarray(0, 5).toString()).toBe('%PDF-')
+      const downloadEvent = page.waitForEvent('download')
+      await page.locator('#resume a[download]').first().click()
+      const download = await downloadEvent
+      expect(download.suggestedFilename()).toBe(version.filename)
+      expect((await readFile((await download.path())!)).equals(pdfBytes)).toBe(
+        true,
+      )
+      await page
+        .getByRole('button', { name: 'Close preview', exact: true })
+        .click()
+    }
   } else {
     await expect(page.getByText('PDF not available yet')).toBeInViewport()
     await expect(page.locator('#resume a[download]')).toHaveCount(0)
@@ -164,10 +209,14 @@ test('contact request prevents double sends and surfaces provider rejection', as
   const send = page.getByRole('button', { name: 'Send message', exact: true })
   await expect(send).toBeEnabled()
   await send.click()
-  await expect(page.getByRole('button', { name: 'Sending your message…' })).toBeDisabled()
+  await expect(
+    page.getByRole('button', { name: 'Sending your message…' }),
+  ).toBeDisabled()
   await expect.poll(() => posts).toBe(1)
   // Bypass the disabled button to ensure concurrent form events cannot double-send.
-  await page.locator('.contact-form').evaluate((form: HTMLFormElement) => form.requestSubmit())
+  await page
+    .locator('.contact-form')
+    .evaluate((form: HTMLFormElement) => form.requestSubmit())
   releaseFirstRequest()
   await expect(page.getByRole('alert')).toContainText('Provider rejected')
   expect(posts).toBe(1)
@@ -176,7 +225,9 @@ test('contact request prevents double sends and surfaces provider rejection', as
   )
   await expect(send).toBeEnabled()
   await send.click()
-  await expect(page.locator('.form-feedback.success')).toContainText('accepted by the email service')
+  await expect(page.locator('.form-feedback.success')).toContainText(
+    'accepted by the email service',
+  )
   await expect(page.getByLabel('Your name', { exact: true })).toHaveValue('')
   expect(posts).toBe(2)
   expect(submissionIds[0]).toBe(submissionIds[1])

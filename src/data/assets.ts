@@ -6,5 +6,6 @@ export interface Screenshot {
 }
 export const assets = manifest as {
   resume: string | null
+  resumeWithPhoto: string | null
   projects: Record<string, Screenshot[]>
 }

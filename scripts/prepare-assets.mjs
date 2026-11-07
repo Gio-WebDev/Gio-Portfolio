@@ -11,19 +11,20 @@ for (const folder of [
   ...projectIds.map((id) => `projects/${id}`),
 ])
   await mkdir(path.join(root, 'public', folder), { recursive: true })
-const resumePath = path.join(root, 'public/resume/Gio-Lopez-Resume.pdf')
-let resume = null
-try {
-  const file = await readFile(resumePath)
-  if (file.subarray(0, 5).toString() === '%PDF-')
-    resume = '/resume/Gio-Lopez-Resume.pdf'
-  else
+async function findResume(filename) {
+  try {
+    const file = await readFile(path.join(root, 'public/resume', filename))
+    if (file.subarray(0, 5).toString() === '%PDF-') return `/resume/${filename}`
     console.warn(
-      'Resume file is not a valid PDF. Keeping the missing-file state.',
+      `${filename} is not a valid PDF. Keeping the missing-file state.`,
     )
-} catch {
-  /* Resume is intentionally optional. */
+  } catch {
+    /* Resume files are intentionally optional. */
+  }
+  return null
 }
+const resume = await findResume('Gio-Lopez-Resume.pdf')
+const resumeWithPhoto = await findResume('Gio-Lopez-Resume-With-Photo.pdf')
 const projects = {}
 for (const id of projectIds) {
   const directory = path.join(root, 'public/projects', id)
@@ -48,6 +49,7 @@ for (const id of projectIds) {
 }
 const manifest = {
   resume,
+  resumeWithPhoto,
   projects,
 }
 await writeFile(
@@ -55,5 +57,5 @@ await writeFile(
   `${JSON.stringify(manifest, null, 2)}\n`,
 )
 console.log(
-  `Assets: ${resume ? 'resume found' : 'resume pending'}, ${Object.values(projects).flat().length} screenshots.`,
+  `Assets: ${resume ? 'ATS resume found' : 'ATS resume pending'}, ${resumeWithPhoto ? 'photo resume found' : 'photo resume pending'}, ${Object.values(projects).flat().length} screenshots.`,
 )
