@@ -1,6 +1,6 @@
 # Portfolio asset TODOs
 
-- [x] Professional photograph added as `images/gio-lopez.jpg`, extracted unchanged from Gio’s photo resume.
+- [x] Hero uses a GL monogram, with no profile photograph, as requested by the owner.
 - [x] Original ATS resume without a photo added as `resume/Gio-Lopez-Resume.pdf`; its phone number is included with the owner’s explicit permission.
 - [ ] Add real POSEIDON screenshots to `projects/poseidon/`.
 - [ ] Add real HANAP screenshots to `projects/hanap/`.

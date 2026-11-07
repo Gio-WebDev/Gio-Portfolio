@@ -5,7 +5,6 @@ export interface Screenshot {
   alt: string
 }
 export const assets = manifest as {
-  portrait: string | null
   resume: string | null
   projects: Record<string, Screenshot[]>
 }

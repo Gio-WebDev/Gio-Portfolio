@@ -40,7 +40,6 @@ const navigation = [
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false)
-  const [portraitFailed, setPortraitFailed] = useState(false)
   const [selected, setSelected] = useState<string | null>(() =>
     new URLSearchParams(window.location.search).get('project'),
   )
@@ -190,38 +189,22 @@ function App() {
                 <span>THE PERSON BEHIND THE PIXELS</span>
                 <span>01 / GL</span>
               </div>
-              {assets.portrait && !portraitFailed ? (
-                <img
-                  className="portrait"
-                  onError={() => setPortraitFailed(true)}
-                  src={assets.portrait}
-                  width="680"
-                  height="820"
-                  alt="Jose Giovanni Miguel T. Lopez"
-                  fetchPriority="high"
-                />
-              ) : (
-                <div
-                  className="portrait-placeholder"
-                  role="img"
-                  aria-label="GL monogram. Gio’s professional photograph has not been added yet."
-                >
-                  <div className="orbit orbit-one" />
-                  <div className="orbit orbit-two" />
-                  <div className="orbit orbit-three" />
-                  <span className="monogram">
-                    g<span>l</span>
-                    <i>.</i>
-                  </span>
-                  <span className="portrait-note">
-                    A face to the name, soon.
-                    <br />
-                    <small>Profile photograph pending</small>
-                  </span>
-                  <span className="cross cross-one">+</span>
-                  <span className="cross cross-two">+</span>
-                </div>
-              )}
+              <div
+                className="identity-art"
+                role="img"
+                aria-label="GL — Gio Lopez monogram"
+              >
+                <div className="orbit orbit-one" />
+                <div className="orbit orbit-two" />
+                <div className="orbit orbit-three" />
+                <span className="monogram">
+                  g<span>l</span>
+                  <i>.</i>
+                </span>
+                <span className="identity-note">UI / UX · WEB DEVELOPMENT</span>
+                <span className="cross cross-one">+</span>
+                <span className="cross cross-two">+</span>
+              </div>
               <div className="profile-caption">
                 <div>
                   <strong>Gio Lopez</strong>

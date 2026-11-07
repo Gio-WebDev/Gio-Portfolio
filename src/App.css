@@ -156,7 +156,7 @@
   padding-bottom: 14px;
   color: #56614f;
 }
-.portrait-placeholder {
+.identity-art {
   height: 340px;
   position: relative;
   overflow: hidden;
@@ -201,17 +201,13 @@
   width: 475px;
   height: 475px;
 }
-.portrait-note {
+.identity-note {
   position: absolute;
   bottom: 27px;
   text-align: center;
   font-size: 13px;
   color: #354f3d;
   line-height: 1.65;
-}
-.portrait-note small {
-  font-size: 9px;
-  color: #50654e;
 }
 .cross {
   position: absolute;
@@ -226,12 +222,6 @@
 .cross-two {
   right: 18px;
   bottom: 12px;
-}
-.portrait {
-  width: 100%;
-  height: 340px;
-  object-fit: cover;
-  object-position: center 30%;
 }
 .profile-caption {
   display: flex;
@@ -1383,8 +1373,7 @@
   .hero h1 {
     font-size: 68px;
   }
-  .portrait-placeholder,
-  .portrait {
+  .identity-art {
     height: 370px;
   }
 }
@@ -1401,8 +1390,7 @@
   .hero-visual {
     padding-top: 0;
   }
-  .portrait-placeholder,
-  .portrait {
+  .identity-art {
     height: 310px;
   }
   .profile-topline {
@@ -1497,8 +1485,7 @@
   .profile-frame {
     padding: 11px;
   }
-  .portrait-placeholder,
-  .portrait {
+  .identity-art {
     height: 290px;
   }
   .monogram {
@@ -1676,8 +1663,7 @@
     margin: 42px auto 0;
     width: min(100%, 390px);
   }
-  .portrait-placeholder,
-  .portrait {
+  .identity-art {
     height: 330px;
   }
   .monogram {
@@ -1879,8 +1865,7 @@
   .profile-topline {
     font-size: 6px;
   }
-  .portrait-placeholder,
-  .portrait {
+  .identity-art {
     height: 300px;
   }
   .profile-caption span {

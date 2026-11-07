@@ -59,7 +59,7 @@ Existing starter assets remain in place and are no longer referenced. Private do
 
 | Asset                  | Required path / instructions                                                                                                                                 |
 | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Professional photo     | `public/images/gio-lopez.webp` (also accepts `.avif`, `.jpg`, `.jpeg`, `.png`; use one). Portrait crop, preferably around 680 × 820, compressed for the web. |
+| Hero artwork           | A text-based GL monogram. The owner requested that the profile photograph be removed. |
 | Resume                 | **`public/resume/Gio-Lopez-Resume.pdf`**. The asset scanner checks the PDF header.                                                                           |
 | POSEIDON screenshots   | Actual images in `public/projects/poseidon/`                                                                                                                 |
 | HANAP screenshots      | Actual images in `public/projects/hanap/`                                                                                                                    |
@@ -68,7 +68,7 @@ Existing starter assets remain in place and are no longer referenced. Private do
 
 The scanner runs before `dev` and `build`. After adding assets, restart the dev server or run `npm.cmd run assets`. It only references files that exist. Missing images produce labeled typographic placeholders; missing PDFs produce an email request link instead of a broken download.
 
-Current supplied assets: the BrewBite homepage screenshot, the Rizal game main-menu screenshot, the original portrait JPEG embedded in Gio’s photo resume, and the original ATS resume without a photo are included. The resume and screenshots are copied unchanged. The owner explicitly authorized including the original PDF and its phone number. The ATS PDF is available for preview, download as `Gio_Resume_ATS_No_Photo.pdf`, and opening in a new tab.
+Current supplied assets: the BrewBite homepage screenshot, the Rizal game main-menu screenshot, and the original ATS resume without a photo are included. The hero uses a GL monogram; no profile photograph is published. The resume and screenshots are copied unchanged. The owner explicitly authorized including the original PDF and its phone number. The ATS PDF is available for preview, download as `Gio_Resume_ATS_No_Photo.pdf`, and opening in a new tab.
 
 Vercel’s response headers allow same-origin embedding for files under `/resume/`, so the portfolio can preview its own PDF while other pages keep their existing framing restrictions. Browsers without an embedded PDF viewer receive direct-open and download links. The local automated browser used the fallback; PDF response bytes and the download were checked separately.
 

@@ -11,9 +11,6 @@ for (const folder of [
   ...projectIds.map((id) => `projects/${id}`),
 ])
   await mkdir(path.join(root, 'public', folder), { recursive: true })
-const portraitFiles = (await readdir(path.join(root, 'public/images')))
-  .filter((file) => /^gio-lopez\.(avif|webp|png|jpe?g)$/i.test(file))
-  .sort()
 const resumePath = path.join(root, 'public/resume/Gio-Lopez-Resume.pdf')
 let resume = null
 try {
@@ -50,7 +47,6 @@ for (const id of projectIds) {
     }))
 }
 const manifest = {
-  portrait: portraitFiles.length ? `/images/${portraitFiles[0]}` : null,
   resume,
   projects,
 }
@@ -59,5 +55,5 @@ await writeFile(
   `${JSON.stringify(manifest, null, 2)}\n`,
 )
 console.log(
-  `Assets: ${manifest.portrait ? 'portrait found' : 'portrait pending'}, ${resume ? 'resume found' : 'resume pending'}, ${Object.values(projects).flat().length} screenshots.`,
+  `Assets: ${resume ? 'resume found' : 'resume pending'}, ${Object.values(projects).flat().length} screenshots.`,
 )
