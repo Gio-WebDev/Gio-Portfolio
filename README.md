@@ -1,6 +1,6 @@
 # Gio Lopez — Portfolio
 
-A responsive React / TypeScript portfolio for **Jose Giovanni Miguel T. Lopez**, a BSIT student at National University – Baliwag seeking internship / OJT opportunities. Built directly in the existing Vite project. Nothing has been deployed or pushed.
+A responsive React / TypeScript portfolio for **Jose Giovanni Miguel T. Lopez**, a BSIT student at National University – Baliwag seeking internship / OJT opportunities. Built directly in the existing Vite project, with production updates managed through its connected GitHub repository and Vercel project.
 
 ## Run locally
 
@@ -29,7 +29,7 @@ npm.cmd run test:e2e
 - Responsive navigation, active section indicators, skip link, visible focus states, reduced-motion support, and subtle scroll reveals.
 - Hero, about, categorized verified skills, education and academic project experience, resume, contact, social links, and dynamic copyright.
 - Four typed project records with POSEIDON featured first. Filters, detailed case studies, shareable `/?project=poseidon` URLs, browser history, native modal focus containment, Escape dismissal, and focus restoration.
-- Actual-asset discovery, honest missing-asset states, screenshot galleries, and image-error fallbacks. No generated project screenshots, fabricated employment, or public phone number.
+- Actual-asset discovery, honest missing-asset states, screenshot galleries, and image-error fallbacks. No generated project screenshots or fabricated employment. The original ATS PDF includes the phone number with the owner’s explicit permission.
 - Conditional PDF preview, download, open-in-new-tab, unsupported-browser fallback, and a clear missing-file state.
 - Server-side Resend endpoint with validation, byte / field limits, honeypot, same-origin checks, rate limiting, provider timeouts, plain-text emails, reply-to, and idempotency.
 - SEO and Open Graph metadata, a custom favicon, social artwork, static 404 page, and Vercel security headers.
@@ -68,6 +68,10 @@ Existing starter assets remain in place and are no longer referenced. Private do
 
 The scanner runs before `dev` and `build`. After adding assets, restart the dev server or run `npm.cmd run assets`. It only references files that exist. Missing images produce labeled typographic placeholders; missing PDFs produce an email request link instead of a broken download.
 
+Current supplied assets: the BrewBite homepage screenshot, the Rizal game main-menu screenshot, the original portrait JPEG embedded in Gio’s photo resume, and the original ATS resume without a photo are included. The resume and screenshots are copied unchanged. The owner explicitly authorized including the original PDF and its phone number. The ATS PDF is available for preview, download as `Gio_Resume_ATS_No_Photo.pdf`, and opening in a new tab.
+
+Vercel’s response headers allow same-origin embedding for files under `/resume/`, so the portfolio can preview its own PDF while other pages keep their existing framing restrictions. Browsers without an embedded PDF viewer receive direct-open and download links. The local automated browser used the fallback; PDF response bytes and the download were checked separately.
+
 Screenshots accept AVIF, WebP, PNG, and JPEG. Files are sorted by name, so use names such as `01-dashboard.webp`, `02-mobile.webp`. The first image is the card cover. Add a `captions.json` in the same project directory for descriptive alt text and captions:
 
 ```json
@@ -85,8 +89,8 @@ All supplied details are centralized in `src/data/content.ts`. UI copy distingui
 
 - **POSEIDON:** project description, technology stack, features, three-member team, and Gio’s responsibilities come from the supplied brief. No capstone paper, code, or screenshots were available. Do not upload the entire paper into `public/` without approval. The supplied admin login URL could not be reached in this environment; it is labeled login-protected and availability-unverified in the case study. Set `demoVerified: true` only after confirming the site works; that enables the card’s live-demo button.
 - **HANAP:** Gio reports an individual full-stack / UI design project. Its listed features await confirmation against screenshots or code. No repository or demo was supplied.
-- **BrewBite-MVC:** the supplied GitHub link returned 404 through the GitHub connector. Only PHP and MVC architecture are confirmed. Purpose, target users, features, database use, exact MVC structure, and Gio’s contributions remain unverified. The supplied URL is retained in typed data. Visitor-facing repository buttons remain hidden until access is confirmed and `repoVerified` is set to `true`.
-- **Rizal game:** original source is unavailable. No screenshots, engine, mechanics, technologies, or detailed individual role were supplied.
+- **BrewBite-MVC:** the supplied homepage screenshot is included as `public/projects/brewbite/01-home.png`. It verifies the café presentation, navigation labels, order/menu entry points, and pickup messaging. PHP and MVC architecture come from the original brief; functional ordering, authentication, database use, and Gio’s contributions still require source verification. The repository returned 404 through the GitHub connector. Its URL remains in typed data, with visitor-facing repository buttons hidden until `repoVerified` is `true`.
+- **Rizal game:** the supplied main-menu screenshot identifies **Buhay ni Rizal: Laro ng Kaalaman**, with Filipino menu entries and a library setting. Source code, engine, gameplay mechanics, and detailed individual role remain unverified. Only what is visible in the screenshot is described.
 - The reference site `juliansantos.site` could not be reached; the design was developed from the requested visual direction.
 - No dates of attendance, graduation year, employment, awards, certificates, outcomes, or proficiency percentages have been invented.
 
@@ -115,9 +119,9 @@ The form blocks concurrent submissions. Retrying the same payload reuses its Res
 
 Official references: [Resend send-email API](https://resend.com/docs/api-reference/emails/send-email), [domain verification](https://resend.com/docs/dashboard/domains/introduction), [Upstash Redis REST](https://upstash.com/docs/redis/features/restapi).
 
-## Vercel and custom domain — when authorized later
+## Vercel and custom domain
 
-No deployment, Git commit, or push was performed.
+The existing GitHub repository is `Gio-WebDev/Gio-Portfolio`, with production updates on `main`. The local checkout is linked to the `gio-portfolio` Vercel project. A push triggers deployment when Vercel’s Git integration is connected; verify the resulting deployment status before reporting it live.
 
 1. Complete the asset and content items above; run lint, API tests, browser checks, and build.
 2. When you authorize publishing, import this existing repository into Vercel. Use the Vite preset, the repository root, `npm run build`, output `dist`, and Node.js 24. `vercel.json` includes the function and security headers. No SPA catch-all rewrite is required: case studies use query parameters on `/`.
@@ -135,6 +139,6 @@ Added runtime dependencies: `lucide-react`, `@fontsource-variable/dm-sans`. Adde
 
 The API tests use Node’s built-in test runner and mocked HTTP responses; they never send real emails. Browser tests cover responsive widths from 320–1440px, navigation, all project cards, case-study history / Escape / focus restoration, missing-file states, submission errors, and automated WCAG 2.2 AA checks. Automated checks do not replace manual screen-reader and real-device review.
 
-Validation completed: `npm run lint` and `npm run build` pass; all **15 API tests** and **10 desktop/mobile browser tests** pass. Automated axe checks found no WCAG 2.2 AA violations on the homepage and POSEIDON case study in the tested desktop/mobile configurations. Overflow checks pass at 320, 375, 768, 1024, and 1440 pixels. Production assets were visually reviewed. Actual resume rendering and real email delivery remain untested because those inputs are missing.
+Validation completed: `npm run lint` and `npm run build` pass; all **15 API tests** and **10 desktop/mobile browser tests** pass. Automated axe checks found no WCAG 2.2 AA violations on the homepage and POSEIDON case study in the tested desktop/mobile configurations. Overflow checks pass at 320, 375, 768, 1024, and 1440 pixels. Browser checks cover the supplied images, PDF response, preview controls, and ATS download filename. Real email delivery remains untested without sending configuration.
 
 `npm audit --omit=dev` reports **zero vulnerabilities**. The full dependency audit reported a moderate `minimatch` advisory propagated through the existing ESLint / TypeScript ESLint development tree (10 reported entries, one underlying advisory). These tools are not part of the deployed browser or contact API. A forced tooling downgrade has not been applied. Review upstream compatible fixes before introducing dependency overrides.

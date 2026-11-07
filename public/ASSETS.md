@@ -1,12 +1,12 @@
 # Portfolio asset TODOs
 
-- [ ] Add the real professional photograph as `images/gio-lopez.webp` (JPEG, PNG, AVIF also accepted).
-- [ ] Add the actual resume PDF as `resume/Gio-Lopez-Resume.pdf`.
+- [x] Professional photograph added as `images/gio-lopez.jpg`, extracted unchanged from Gio’s photo resume.
+- [x] Original ATS resume without a photo added as `resume/Gio-Lopez-Resume.pdf`; its phone number is included with the owner’s explicit permission.
 - [ ] Add real POSEIDON screenshots to `projects/poseidon/`.
 - [ ] Add real HANAP screenshots to `projects/hanap/`.
-- [ ] Add real BrewBite screenshots to `projects/brewbite/`.
-- [ ] Add real Rizal educational game screenshots to `projects/rizal/`.
-- [ ] Add `captions.json` beside each screenshot set with accurate descriptions.
+- [x] BrewBite homepage screenshot added as `projects/brewbite/01-home.png`, with an accurate caption.
+- [x] Original Rizal game screenshot added as `projects/rizal/01-main-menu.jpg`.
+- [x] Accurate `captions.json` files added beside the supplied BrewBite and Rizal screenshots.
 
 Restart the dev server or run `npm run assets` after adding files. The first screenshot in filename order becomes the card image. No screenshot is fabricated. Private papers, keys, and personal client/worker information must stay outside this public folder.
 

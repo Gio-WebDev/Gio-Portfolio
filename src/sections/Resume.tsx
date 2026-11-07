@@ -32,7 +32,7 @@ export function Resume() {
               <div>
                 <strong>Gio Lopez — Resume</strong>
                 <span>
-                  {assets.resume ? 'PDF document' : 'PDF not available yet'}
+                  {assets.resume ? 'ATS resume · PDF · No photo' : 'PDF not available yet'}
                 </span>
               </div>
               {assets.resume && <span className="file-type">PDF</span>}
@@ -50,7 +50,7 @@ export function Resume() {
                   <a
                     href={assets.resume}
                     className="button secondary"
-                    download="Gio-Lopez-Resume.pdf"
+                    download="Gio_Resume_ATS_No_Photo.pdf"
                   >
                     <Download size={16} /> Download
                   </a>

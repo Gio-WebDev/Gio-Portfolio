@@ -155,7 +155,7 @@ function App() {
                 Explore my work <ArrowDownRight size={18} />
               </a>
               {assets.resume ? (
-                <a className="button secondary" href={assets.resume} download>
+                  <a className="button secondary" href={assets.resume} download="Gio_Resume_ATS_No_Photo.pdf">
                   Download resume <Download size={16} />
                 </a>
               ) : (

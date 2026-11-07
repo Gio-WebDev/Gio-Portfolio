@@ -1,10 +1,20 @@
 {
-  "portrait": null,
-  "resume": null,
+  "portrait": "/images/gio-lopez.jpg",
+  "resume": "/resume/Gio-Lopez-Resume.pdf",
   "projects": {
     "poseidon": [],
     "hanap": [],
-    "brewbite": [],
-    "rizal": []
+    "brewbite": [
+      {
+        "src": "/projects/brewbite/01-home.png",
+        "alt": "BrewBite café homepage with coffee and food messaging, menu navigation, and order-ahead pickup information."
+      }
+    ],
+    "rizal": [
+      {
+        "src": "/projects/rizal/01-main-menu.jpg",
+        "alt": "Buhay ni Rizal: Laro ng Kaalaman main menu in an illustrated library, showing Magsimula, Tagumpay, Umalis, and an audio-control icon."
+      }
+    ]
   }
 }

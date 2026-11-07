@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test'
 import AxeBuilder from '@axe-core/playwright'
+import assets from '../../src/data/assets.generated.json' with { type: 'json' }
 
 test('portfolio has no overflow or runtime errors and exposes all verified projects', async ({
   page,
@@ -24,6 +25,11 @@ test('portfolio has no overflow or runtime errors and exposes all verified proje
       ? { width: 393, height: 851 }
       : { width: 1440, height: 1000 },
   )
+  for (const image of await page.locator('img').all()) {
+    await image.scrollIntoViewIfNeeded()
+    await expect.poll(() => image.evaluate((element: HTMLImageElement) => element.complete && element.naturalWidth > 0)).toBe(true)
+  }
+  await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }))
   await page.screenshot({
     path: `artifacts/${testInfo.project.name}-home.png`,
     fullPage: false,
@@ -85,8 +91,22 @@ test('navigation and honest resume/contact states work', async ({
     .getByRole('navigation', { name: 'Main navigation' })
     .getByRole('link', { name: 'Resume', exact: true })
     .click()
-  await expect(page.getByText('PDF not available yet')).toBeInViewport()
-  await expect(page.locator('#resume a[download]')).toHaveCount(0)
+  if (assets.resume) {
+    await expect(page.getByText('ATS resume · PDF · No photo')).toBeInViewport()
+    await page.getByRole('button', { name: 'View resume', exact: true }).click()
+    await expect(page.getByLabel('Gio Lopez resume PDF')).toHaveAttribute('data', assets.resume)
+    const pdf = await page.request.get(assets.resume)
+    expect(pdf.ok()).toBe(true)
+    expect((await pdf.body()).subarray(0, 5).toString()).toBe('%PDF-')
+    const downloadEvent = page.waitForEvent('download')
+    await page.locator('#resume a[download]').first().click()
+    const download = await downloadEvent
+    expect(download.suggestedFilename()).toBe('Gio_Resume_ATS_No_Photo.pdf')
+    await page.getByRole('button', { name: 'Close preview', exact: true }).click()
+  } else {
+    await expect(page.getByText('PDF not available yet')).toBeInViewport()
+    await expect(page.locator('#resume a[download]')).toHaveCount(0)
+  }
   if (testInfo.project.name === 'mobile')
     await page.getByRole('button', { name: 'Open navigation' }).click()
   await page

@@ -116,34 +116,39 @@ export const projects: Project[] = [
     id: 'brewbite',
     number: '03',
     title: 'BrewBite-MVC',
-    subtitle: 'An exploration of PHP and MVC.',
+    subtitle: 'Coffee, comforting bites, and a little pause.',
     category: 'Academic web application',
     description:
-      'A PHP academic web project organized around the Model–View–Controller architecture.',
+      'A café web project built with PHP and MVC, with a homepage introducing coffee, food, and pickup ordering.',
     filters: ['Web & mobile'],
     technologies: ['PHP', 'MVC architecture'],
     role: 'Individual contribution awaiting confirmation',
     context: 'Academic project',
     overview:
-      'BrewBite-MVC is identified by Gio as an academic PHP web application using MVC architecture. Further details are being prepared for this case study.',
+      'BrewBite-MVC is an academic PHP web application using MVC architecture. The supplied homepage screenshot presents BrewBite as a café, with coffee and food messaging, a menu entry point, and order-ahead pickup information.',
     purpose:
-      'The application’s specific purpose has not yet been verified from source materials.',
-    users: 'Target users await source or README verification.',
-    features: [],
-    featureLabel: 'Features awaiting verification',
+      'Introduce the café and guide visitors toward its menu and pickup-ordering entry points. The screenshot establishes the interface’s purpose; the underlying ordering implementation has not been verified.',
+    users: 'Café visitors browsing food and drinks or looking for pickup-ordering information.',
+    features: [
+      'Café homepage with coffee photography and food-and-drink messaging',
+      'Navigation links for the menu, café story, login, and joining BrewBite',
+      'Order now and Explore our menu entry points',
+      'Order-ahead and cash-on-pickup information',
+    ],
+    featureLabel: 'Visible in the supplied homepage screenshot',
     contributions: [
       'Gio’s specific contributions need confirmation before this case study can be expanded.',
     ],
     verification:
-      'The supplied GitHub repository could not be accessed for review. No local source, README, database schema, or screenshots were provided. Purpose, features, database technology, MVC implementation, and authorship have not been inferred from the project name.',
+      'The homepage screenshot is supplied by Gio and shows the interface described here. PHP and MVC architecture come from the original project brief. Source code, README, and database schema remain unavailable, and the repository could not be accessed for review. Working authentication, ordering, database use, and Gio’s individual contributions are not confirmed by the screenshot.',
     repo: 'https://github.com/Gio-WebDev/BrewBite-MVC',
     repoVerified: false,
   },
   {
     id: 'rizal',
     number: '04',
-    title: 'Rizal Educational Game',
-    subtitle: 'History through an academic lens.',
+    title: 'Buhay ni Rizal',
+    subtitle: 'Laro ng Kaalaman — an academic educational game.',
     category: 'Academic educational game',
     description:
       'An educational game project related to the life and history of Dr. José Rizal.',
@@ -152,18 +157,22 @@ export const projects: Project[] = [
     role: 'Academic project participant',
     context: 'Academic educational project',
     overview:
-      'An academic educational game related to the life and history of Dr. José Rizal. The original source code is unavailable.',
+      'Buhay ni Rizal: Laro ng Kaalaman is an academic educational game related to the life and history of Dr. José Rizal. The supplied screenshot shows a Filipino-language main menu set in an illustrated library. The original source code is unavailable.',
     purpose:
       'Explore an educational subject through an academic game project centered on Dr. José Rizal.',
     users:
       'Educational audience; the specific target learner group is not documented.',
-    features: [],
-    featureLabel: 'Gameplay details not documented',
+    features: [
+      'Filipino-language main menu titled Buhay ni Rizal: Laro ng Kaalaman',
+      'Visible Magsimula, Tagumpay, and Umalis menu entries',
+      'Illustrated library setting and an audio-control icon',
+    ],
+    featureLabel: 'Visible in the supplied main-menu screenshot',
     contributions: [
       'Specific individual responsibilities have not yet been supplied.',
     ],
     verification:
-      'Source code is unavailable and screenshots have not yet been supplied. The game engine, technologies, gameplay mechanics, team structure, and specific individual contributions are not confirmed. No repository or live demo is available.',
+      'The supplied screenshot verifies the title and visible main-menu interface. Source code remains unavailable. The game engine, technologies, gameplay mechanics, behavior of the menu controls, team structure, and specific individual contributions are not confirmed. No repository or live demo is available.',
   },
 ]
 
