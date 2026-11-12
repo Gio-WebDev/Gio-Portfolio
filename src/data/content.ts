@@ -110,7 +110,7 @@ export const projects: Project[] = [
       'UI design for the web and mobile experience',
     ],
     verification:
-      'Project scope, features, and individual role are supplied by Gio. Source code and screenshots are not available here, so implementation details and reported features await independent verification. No public repository or live demo has been supplied.',
+      'Project scope, features, and individual role are supplied by Gio. Two supplied screenshots show the landing page and its feature cards. Source code is not available, so the reported application workflows, marketing claims, and displayed statistics have not been independently verified. No public repository or live demo has been supplied.',
   },
   {
     id: 'brewbite',

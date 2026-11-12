@@ -3,7 +3,16 @@
   "resumeWithPhoto": "/resume/Gio-Lopez-Resume-With-Photo.pdf",
   "projects": {
     "poseidon": [],
-    "hanap": [],
+    "hanap": [
+      {
+        "src": "/projects/hanap/01-landing-page.jpg",
+        "alt": "HANAP landing page introducing local skilled-worker services, with login navigation and a Start Hiring Free button."
+      },
+      {
+        "src": "/projects/hanap/02-features-section.jpg",
+        "alt": "HANAP feature section showing the Verified Workers, Real-Time Tracking, and Near You cards."
+      }
+    ],
     "brewbite": [
       {
         "src": "/projects/brewbite/01-home.png",

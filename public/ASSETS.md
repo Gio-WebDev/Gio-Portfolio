@@ -4,10 +4,10 @@
 - [x] Original ATS resume without a photo added as `resume/Gio-Lopez-Resume.pdf`; its phone number is included with the owner’s explicit permission.
 - [x] Original resume with a photo added as `resume/Gio-Lopez-Resume-With-Photo.pdf`, selectable in the Resume section.
 - [ ] Add real POSEIDON screenshots to `projects/poseidon/`.
-- [ ] Add real HANAP screenshots to `projects/hanap/`.
+- [x] Original HANAP landing-page and feature-section screenshots added to `projects/hanap/`, with accurate captions.
 - [x] BrewBite homepage screenshot added as `projects/brewbite/01-home.png`, with an accurate caption.
 - [x] Original Rizal game screenshot added as `projects/rizal/01-main-menu.jpg`.
-- [x] Accurate `captions.json` files added beside the supplied BrewBite and Rizal screenshots.
+- [x] Accurate `captions.json` files added beside the supplied HANAP, BrewBite, and Rizal screenshots.
 
 Restart the dev server or run `npm run assets` after adding files. The first screenshot in filename order becomes the card image. No screenshot is fabricated. Private papers, keys, and personal client/worker information must stay outside this public folder.
 
